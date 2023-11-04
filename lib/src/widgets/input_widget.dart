@@ -101,7 +101,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
       this.keyboardType = TextInputType.phone,
       this.initialValue,
       this.hintText = 'Phone number',
-      this.errorMessage = 'Invalid phone number',
+      this.errorMessage = 'Invalid mobile number',
       this.selectorButtonOnErrorPadding = 24,
       this.spaceBetweenSelectorAndTextField = 12,
       this.maxLength = 15,
@@ -318,6 +318,9 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
   ///
   /// Also updates [selectorButtonBottomPadding]
   String? validator(String? value) {
+    if (value?.isEmpty ?? true) {
+      return 'This field is required';
+    }
     bool isValid =
         this.isNotValid && (value!.isNotEmpty || widget.ignoreBlank == false);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

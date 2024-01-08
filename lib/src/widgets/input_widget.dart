@@ -318,7 +318,7 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
   ///
   /// Also updates [selectorButtonBottomPadding]
   String? validator(String? value) {
-    if (widget.ignoreBlank == false && value?.isEmpty ?? true) {
+    if (widget.ignoreBlank == false && (value?.isEmpty ?? true)) {
       return 'This field is required';
     }
     bool isValid =

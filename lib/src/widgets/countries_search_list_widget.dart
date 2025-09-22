@@ -12,6 +12,7 @@ class CountrySearchListWidget extends StatefulWidget {
   final bool autoFocus;
   final bool? showFlags;
   final bool? useEmoji;
+  final Widget? onNotFoundWidget; // Added this parameter
 
   CountrySearchListWidget(
     this.countries,
@@ -21,6 +22,7 @@ class CountrySearchListWidget extends StatefulWidget {
     this.showFlags,
     this.useEmoji,
     this.autoFocus = false,
+    this.onNotFoundWidget, // Added this parameter
   });
 
   @override
@@ -46,13 +48,49 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
   @override
   void dispose() {
     _searchController.dispose();
-    super.dispose();
+    super.initState();
   }
 
   /// Returns [InputDecoration] of the search box
   InputDecoration getSearchBoxDecoration() {
     return widget.searchBoxDecoration ??
         InputDecoration(labelText: 'Search by country name or dial code');
+  }
+
+  /// Returns the default "not found" widget
+  Widget _getDefaultNotFoundWidget() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.search_off,
+              size: 64,
+              color: Colors.grey[400],
+            ),
+            SizedBox(height: 16),
+            Text(
+              'No countries found',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Try adjusting your search',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[500],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -80,44 +118,23 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
           ),
         ),
         Flexible(
-          child: ListView.builder(
-            controller: widget.scrollController,
-            shrinkWrap: true,
-            itemCount: filteredCountries.length,
-            itemBuilder: (BuildContext context, int index) {
-              Country country = filteredCountries[index];
+          child: filteredCountries.isEmpty
+              ? widget.onNotFoundWidget ?? _getDefaultNotFoundWidget()
+              : ListView.builder(
+                  controller: widget.scrollController,
+                  shrinkWrap: true,
+                  itemCount: filteredCountries.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Country country = filteredCountries[index];
 
-              return DirectionalCountryListTile(
-                country: country,
-                locale: widget.locale,
-                showFlags: widget.showFlags!,
-                useEmoji: widget.useEmoji!,
-              );
-              // return ListTile(
-              //   key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
-              //   leading: widget.showFlags!
-              //       ? _Flag(country: country, useEmoji: widget.useEmoji)
-              //       : null,
-              //   title: Align(
-              //     alignment: AlignmentDirectional.centerStart,
-              //     child: Text(
-              //       '${Utils.getCountryName(country, widget.locale)}',
-              //       textDirection: Directionality.of(context),
-              //       textAlign: TextAlign.start,
-              //     ),
-              //   ),
-              //   subtitle: Align(
-              //     alignment: AlignmentDirectional.centerStart,
-              //     child: Text(
-              //       '${country.dialCode ?? ''}',
-              //       textDirection: TextDirection.ltr,
-              //       textAlign: TextAlign.start,
-              //     ),
-              //   ),
-              //   onTap: () => Navigator.of(context).pop(country),
-              // );
-            },
-          ),
+                    return DirectionalCountryListTile(
+                      country: country,
+                      locale: widget.locale,
+                      showFlags: widget.showFlags!,
+                      useEmoji: widget.useEmoji!,
+                    );
+                  },
+                ),
         ),
       ],
     );

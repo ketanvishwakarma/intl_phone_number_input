@@ -4227,7 +4227,8 @@ class Countries {
         "ar": "مقدونيا",
         "fa": "مقدونیه",
         "yue": "馬其頓（前南斯拉夫共和國）",
-        "el": "Βόρεια Μακεδονία (πρώην Γιουγκοσλαβική Δημοκρατία της Μακεδονίας)",
+        "el":
+            "Βόρεια Μακεδονία (πρώην Γιουγκοσλαβική Δημοκρατία της Μακεδονίας)",
       }
     },
     {
@@ -7242,7 +7243,7 @@ class Countries {
       "num_code": "792",
       "alpha_2_code": "TR",
       "alpha_3_code": "TUR",
-      "en_short_name": "Turkey",
+      "en_short_name": "Türkiye",
       "nationality": "Turkish",
       "dial_code": "+90",
       "nameTranslations": {
@@ -7257,7 +7258,7 @@ class Countries {
         "de": "Türkei",
         "fr": "Turquie",
         "es": "Turquía",
-        "en": "Turkey",
+        "en": "Türkiye",
         "pt_BR": "Peru",
         "sr-Cyrl": "Турска",
         "sr-Latn": "Turska",
@@ -7466,7 +7467,7 @@ class Countries {
       "num_code": "826",
       "alpha_2_code": "GB",
       "alpha_3_code": "GBR",
-      "en_short_name": "United Kingdom of Great Britain and Northern Ireland",
+      "en_short_name": "United Kingdom of Great Britain",
       "nationality": "British, UK",
       "dial_code": "+44",
       "nameTranslations": {
@@ -7491,7 +7492,8 @@ class Countries {
         "ar": "المملكة المتحدة",
         "fa": "بریتانیا",
         "yue": "大不列顛及北愛爾蘭聯合王國",
-        "el": "Ηνωμένο Βασίλειο της Μεγάλης Βρετανίας και της Βόρειας Ιρλανδίας",
+        "el":
+            "Ηνωμένο Βασίλειο της Μεγάλης Βρετανίας και της Βόρειας Ιρλανδίας",
       }
     },
     {
